@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>AI Chatbot</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="chat-container">
+      <header class="chat-header">
+        <h1>AI Chatbot</h1>
+      </header>
+
+      <main class="chat-wrap">
+        <!-- ✅ Correct container ID -->
+        <div class="messages" id="messages">
+          <!-- Example bot message -->
+          <div class="message bot-message">
+            <div class="text">
+              Hello! I'm your AI assistant. Type a message and press send.
+            </div>
+            <div class="meta-line"><span class="time">10:30 AM</span></div>
+          </div>
+
+          <!-- Example user message -->
+          <div class="message user-message">
+            <div class="text">Hi — testing the UI.</div>
+            <div class="meta-line"><span class="time">10:31 AM</span></div>
+          </div>
+        </div>
+
+        <!-- ✅ Input area -->
+        <div class="composer">
+          <textarea
+            id="input"
+            class="input"
+            placeholder="Write a message..."
+          ></textarea>
+          <button id="sendBtn" class="send">Send</button>
+        </div>
+      </main>
+    </div>
+
+    <!-- ✅ JS linked correctly -->
+    <script src="script.js"></script>
+  </body>
+</html>
