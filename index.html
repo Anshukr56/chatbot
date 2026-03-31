@@ -4,45 +4,63 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>AI Chatbot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="chat-container">
       <header class="chat-header">
-        <h1>AI Chatbot</h1>
+        <div class="header-avatar">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C10.3431 2 9 3.34315 9 5C9 6.65685 10.3431 8 12 8C13.6569 8 15 6.65685 15 5C15 3.34315 13.6569 2 12 2Z" fill="currentColor"/>
+            <path d="M7 10C5.89543 10 5 10.8954 5 12V19C5 19.5523 5.44772 20 6 20H18C18.5523 20 19 19.5523 19 19V12C19 10.8954 18.1046 10 17 10H7Z" fill="currentColor" opacity="0.8"/>
+            <circle cx="12" cy="5" r="2.5" fill="white" opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="header-info">
+          <h1>AI Assistant</h1>
+          <span class="status"><span class="status-dot"></span>Online</span>
+        </div>
       </header>
 
       <main class="chat-wrap">
-        <!-- ✅ Correct container ID -->
         <div class="messages" id="messages">
-          <!-- Example bot message -->
-          <div class="message bot-message">
-            <div class="text">
-              Hello! I'm your AI assistant. Type a message and press send.
+          <div class="msg ai">
+            <div class="msg-avatar">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C10.3431 2 9 3.34315 9 5C9 6.65685 10.3431 8 12 8C13.6569 8 15 6.65685 15 5C15 3.34315 13.6569 2 12 2Z" fill="currentColor"/>
+                <path d="M7 10C5.89543 10 5 10.8954 5 12V19C5 19.5523 5.44772 20 6 20H18C18.5523 20 19 19.5523 19 19V12C19 10.8954 18.1046 10 17 10H7Z" fill="currentColor" opacity="0.8"/>
+              </svg>
             </div>
-            <div class="meta-line"><span class="time">10:30 AM</span></div>
-          </div>
-
-          <!-- Example user message -->
-          <div class="message user-message">
-            <div class="text">Hi — testing the UI.</div>
-            <div class="meta-line"><span class="time">10:31 AM</span></div>
+            <div class="msg-body">
+              <div class="text">Hello! I'm your AI assistant. Type a message and press send.</div>
+              <div class="meta-line"><span class="time">Now</span></div>
+            </div>
           </div>
         </div>
 
-        <!-- ✅ Input area -->
         <div class="composer">
           <textarea
             id="input"
             class="input"
-            placeholder="Write a message..."
+            placeholder="Type a message…"
+            rows="1"
           ></textarea>
-          <button id="sendBtn" class="send">Send</button>
+          <button id="sendBtn" class="send" title="Send message">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
         </div>
       </main>
     </div>
 
-    <!-- ✅ JS linked correctly -->
     <script src="script.js"></script>
   </body>
 </html>
