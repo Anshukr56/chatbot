@@ -6,152 +6,325 @@
 }
 
 body {
-  background-color: #0f172a;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
   color: #fff;
-  font-family: "Segoe UI", sans-serif;
+  font-family: "Inter", "Segoe UI", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
 }
 
 /* === Chat Container === */
 .chat-container {
-  background-color: #111827;
-  width: 420px;
-  height: 600px;
-  border-radius: 16px;
+  background: rgba(17, 24, 39, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  width: 440px;
+  height: 640px;
+  border-radius: 24px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.05);
+  overflow: hidden;
 }
 
 /* === Header === */
 .chat-header {
-  text-align: center;
-  padding: 16px;
-  border-bottom: 1px solid #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: linear-gradient(90deg, #1e1b4b, #312e81);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.header-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35);
+}
+
+.header-avatar svg {
+  width: 22px;
+  height: 22px;
+  color: #fff;
+}
+
+.header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .chat-header h1 {
-  font-size: 1.4rem;
-  color: #7dd3fc;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #e0e7ff;
+  letter-spacing: 0.01em;
 }
 
-/* === ✅ NEW FIX: Main Chat Area Wrapper === */
-/* This rule makes the chat area fill the space */
+.status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  color: #a5b4fc;
+  font-weight: 500;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  background: #34d399;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #34d399;
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* === Main Chat Area Wrapper === */
 .chat-wrap {
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Prevents overflow issues */
+  overflow: hidden;
 }
 
-/* === ✅ FIX 2: This is the main message container === */
-/* This rule makes the messages scrollable */
+/* === Messages Container === */
 .messages {
   flex: 1;
   overflow-y: auto;
-  padding: 16px;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  scroll-behavior: smooth;
 }
 
-/* === Chat Messages (individual bubble) === */
-.message {
-  /* This is now just a wrapper, styles are below */
+/* === Message Row === */
+.msg {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  max-width: 80%;
+  animation: fadeSlideIn 0.25s ease-out;
 }
 
-/* === Message Bubbles === */
-/* ✅ FIX 1: Renamed .user-message to .me */
-.me,
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* === Message Avatars === */
+.msg-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ai .msg-avatar {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  order: -1;
+}
+
+.ai .msg-avatar svg {
+  width: 16px;
+  height: 16px;
+  color: #fff;
+}
+
+.me .msg-avatar {
+  background: linear-gradient(135deg, #3b82f6, #06b6d4);
+  order: 1;
+}
+
+.me .msg-avatar::after {
+  content: "U";
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* === Message Body === */
+.msg-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* === AI messages (left-aligned) === */
 .ai {
+  align-self: flex-start;
+}
+
+.ai .msg-body .text {
+  background: #1e293b;
+  color: #e2e8f0;
+  border-radius: 18px 18px 18px 4px;
   padding: 10px 14px;
-  border-radius: 10px;
-  margin: 10px 0;
-  max-width: 70%;
-  line-height: 1.4;
+  font-size: 0.9rem;
+  line-height: 1.55;
   word-wrap: break-word;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
 
-/* User messages (align right) */
-/* ✅ FIX 1: Renamed .user-message to .me */
+/* === User messages (right-aligned) === */
 .me {
-  background-color: #2563eb;
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.me .msg-body {
+  align-items: flex-end;
+}
+
+.me .msg-body .text {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
   color: #fff;
-  margin-left: auto;
-  text-align: right;
+  border-radius: 18px 18px 4px 18px;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  word-wrap: break-word;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.35);
 }
 
-/* Bot messages (align left) */
-/* ✅ FIX 1: Renamed .bot-message to .ai */
-.ai {
-  background-color: #1e293b;
-  color: #fff;
-  margin-right: auto;
-  text-align: left;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-}
-
-/* Typing indicator */
-/* ✅ FIX 1: Renamed to .ai.typing */
-.ai.typing {
-  opacity: 0.7;
-  font-style: italic;
-}
-
-/* === Meta Line (optional time/info) === */
+/* === Meta Line === */
 .meta-line {
-  font-size: 0.75rem;
-  opacity: 0.6;
-  margin-top: 4px;
-  text-align: right;
+  font-size: 0.68rem;
+  opacity: 0.45;
+  padding: 0 4px;
 }
 
-/* === Input Area === */
+.ai .meta-line { text-align: left; }
+.me .meta-line { text-align: right; }
+
+/* === Typing Indicator === */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 14px;
+  background: #1e293b;
+  border-radius: 18px 18px 18px 4px;
+  width: fit-content;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.typing-indicator span {
+  width: 7px;
+  height: 7px;
+  background: #94a3b8;
+  border-radius: 50%;
+  display: inline-block;
+  animation: bounce 1.2s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40% { transform: translateY(-6px); opacity: 1; }
+}
+
+/* === Input / Composer === */
 .composer {
   display: flex;
-  border-top: 1px solid #1e293b;
-  padding: 12px;
-  background-color: #0f172a;
-  align-items: center;
+  align-items: flex-end;
+  gap: 10px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 12px 16px;
+  background: rgba(15, 23, 42, 0.85);
 }
 
 .input {
   flex: 1;
-  background-color: #1e293b;
-  border: none;
-  color: #fff;
-  border-radius: 10px;
-  padding: 10px;
-  font-size: 0.95rem;
+  background: #1e293b;
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #e2e8f0;
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  font-family: inherit;
   resize: none;
   outline: none;
+  max-height: 120px;
+  line-height: 1.5;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input::placeholder {
+  color: #475569;
+}
+
+.input:focus {
+  border-color: rgba(99, 102, 241, 0.6);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
 }
 
 .send {
-  background-color: #3b82f6;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
   color: #fff;
   border: none;
-  padding: 10px 18px;
-  border-radius: 10px;
-  margin-left: 10px;
-  font-weight: 600;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
 }
 
 .send:hover {
-  background-color: #2563eb;
+  transform: scale(1.08);
+  box-shadow: 0 6px 18px rgba(99, 102, 241, 0.55);
 }
 
-/* === Scrollbar styling === */
-/* ✅ FIX 2: Changed from .message to .messages */
+.send:active {
+  transform: scale(0.95);
+}
+
+.send svg {
+  width: 18px;
+  height: 18px;
+  margin-left: 2px;
+}
+
+/* === Scrollbar === */
 .messages::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 
-/* ✅ FIX 2: Changed from .message to .messages */
+.messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 .messages::-webkit-scrollbar-thumb {
-  background: #475569;
+  background: #334155;
   border-radius: 10px;
 }
+
+.messages::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
